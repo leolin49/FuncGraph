@@ -44,7 +44,11 @@ class FuncCpp:
             f_ret, f_name, f_param = funcs[0][0], funcs[0][1], funcs[0][2]
             if f_ret == "return":
                 continue
-            if f_name in cfg.KEYWORD_SET_CPP or f_name in cfg.KEYWORD_SET_CPP or f_name[0].isdigit():
+            if (
+                f_name in cfg.KEYWORD_SET_CPP
+                or f_name in cfg.KEYWORD_SET_CPP
+                or f_name[0].isdigit()
+            ):
                 # invalid function name
                 self.log.error("Invalid function name: {}".format(f_name))
                 continue
@@ -75,6 +79,6 @@ class FuncCpp:
                 cur_id = self.line_func[lineno + 1]
                 continue
             for obj in self.func_list:
-                if re.search('.*?'+obj.name+'\s*\(', s) is not None:
+                if re.search(".*?" + obj.name + "\s*\(", s) is not None:
                     self.edges[cur_id].append(obj.id)
         self.draw()

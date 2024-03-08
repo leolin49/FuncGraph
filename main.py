@@ -6,11 +6,13 @@ from func_go import FuncGolang
 
 
 def print_help():
-    print("Source file function call relation visualize:")
-    print("Currently supported source file types: \".cpp\", \".go\"")
-    print("{} [command] [file path] [command options]".format(sys.argv[0]))
-    print("Command: ")
-    print("  gen      visualize the [file path] function's call relationship by graph")
+    print("Source file function call relation visualize.")
+    print('Currently supported source file types: ".cpp", ".go"\n')
+    print("Usage:\n")
+    print("\tpython {} [command] [arguments]\n".format(sys.argv[0]))
+    print("The Commands are:\n")
+    print("\thelp\tPrint the instructions and usage")
+    print("\tgen\tGenerate function call relationships for a given source file")
 
 
 def main():
@@ -28,9 +30,12 @@ def main():
         elif file_type == "go":
             f = FuncGolang(file_path)
         f.start()
-    else:
+    elif cmd == "help":
         print_help()
+    else:
+        print("{}: unknown command".format(sys.argv[1]))
+        print("Run 'python main.py help' for usage.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

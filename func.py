@@ -7,6 +7,8 @@ class Func:
         self.line_num = lineno
 
     def to_str(self):
-        return "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(
-            self.id, self.line_num, self.name, self.param, self.ret
+        return (
+            "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(
+                self.id, self.line_num, self.name, self.param, self.ret
+            )
         )

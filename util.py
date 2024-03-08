@@ -16,7 +16,7 @@ def get_logger(log_file_path: str, name="Unknown log name"):
         format="%(asctime)s-%(name)s-%(lineno)s-%(levelname)s - %(message)s",
         filename=log_file_path,
         # filemode='a', # append at the end of log file
-        filemode='w',   # rewrite the log file
+        filemode="w",  # rewrite the log file
     )
     return logger
 
@@ -47,4 +47,4 @@ def show_graph(dig: nx.DiGraph):
 
 
 def get_file_type(filename: str) -> str:
-    return filename.split('.')[-1]
+    return filename.split(".")[-1]
