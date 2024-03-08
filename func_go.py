@@ -34,11 +34,13 @@ class FuncGolang:
         example: func split(seq rune, max_split uint32) ([]string) {
         """
         for lineno, s in enumerate(self.file_lines):
-            funcs = re.findall(cfg.FUNC_PATTERN_CPP, s)
+            funcs = re.findall(cfg.FUNC_PATTERN_GOLANG, s)
             if len(funcs) == 0:
                 continue
-            f_ret, f_name, f_param = funcs[0][0], funcs[0][1], funcs[0][2]
-            if f_name in cfg.INVALID_FUNC_NAME_CPP or f_ret in cfg.INVALID_FUNC_RET_CPP:
+            f_name, f_param, f_ret = funcs[0][0], funcs[0][1], funcs[0][2]
+            if f_name in cfg.KEYWORD_SET_GOLANG or f_name in cfg.KEYWORD_SET_GOLANG or f_name[0].isdigit():
+                # invalid function name
+                self.log.error("Invalid function name: {}".format(f_name))
                 continue
             f_lineno = lineno + 1
             self.log.info(

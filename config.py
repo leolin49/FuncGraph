@@ -10,6 +10,9 @@ Function name:
     1. cannot be a C++ keyword
     2. Cannot start with a number
 """
+FUNC_PATTERN_CPP = r"\s*(\w+)\s+(\w+)\s*\((.*?)\)\s*{*"
+LOG_PATH_CPP = "log/cpp_log.log"
+LOG_NAME_CPP = "func_cpp"
 KEYWORD_SET_CPP = {
     "if",
     "int",
@@ -60,9 +63,6 @@ KEYWORD_SET_CPP = {
     "protected",
     "struct",
 }
-FUNC_PATTERN_CPP = r"\s*(\w+)\s+(\w+)\s*\((.*?)\)\s*{*"
-LOG_PATH_CPP = "log/cpp_log.log"
-LOG_NAME_CPP = "func_cpp"
 
 """
 Golang Config
@@ -72,4 +72,31 @@ Golang function code style:     func function_name(parameter list) (return list)
 """
 FUNC_PATTERN_GOLANG = r"\s*func\s+(\w+)\s*\((.*?)\)\s*\(*(.*?)\)*\s*{"
 LOG_PATH_GOLANG = "log/golang_log.log"
-LOG_NAME_GOLANG = "func_golang"
+LOG_NAME_GOLANG = "func_golang" ""
+KEYWORD_SET_GOLANG = {
+    "import",
+    "package",
+    "chan",
+    "const",
+    "func",
+    "interface",
+    "map",
+    "struct",
+    "type",
+    "var",
+    "break",
+    "case",
+    "continue",
+    "default",
+    "defer",
+    "else",
+    "fallthrough",
+    "for",
+    "go",
+    "goto",
+    "if",
+    "range",
+    "return",
+    "select",
+    "switch",
+}
