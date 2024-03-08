@@ -22,17 +22,19 @@ def get_logger(log_file_path: str, name="Unknown log name"):
 
 
 def show_graph(dig: nx.DiGraph, node_color: str):
-    pos = nx.spring_layout(dig, k=1)
-    # pos = nx.arf_layout(dig)
-    nx.draw(dig, pos, with_labels=True)
+    # pos = nx.spring_layout(dig, k=1)
+    pos = nx.arf_layout(dig)
+    nx.draw(dig, pos, with_labels=True, font_weight="bold", font_color="black")
     # draw nodes
     nodes = [node for node in dig.nodes]
     nx.draw_networkx_nodes(
         dig,
         pos,
         nodelist=nodes,
-        node_size=2000,
+        node_size=1000,
         node_color=node_color,
+        alpha=0.618,
+        node_shape='o'
     )
     # draw edges
     edges = [(u, v) for (u, v) in dig.edges]
@@ -41,8 +43,9 @@ def show_graph(dig: nx.DiGraph, node_color: str):
         pos,
         edgelist=edges,
         arrows=True,
-        arrowsize=40,
+        arrowsize=20,
         arrowstyle="-|>",
+        style="dashed"
     )
     plt.show()
 

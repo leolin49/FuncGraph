@@ -1,7 +1,7 @@
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 0: line:39, name:pringG, parameters:, return_type:
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 1: line:48, name:ok, parameters:x, y int, return_type:bool
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 2: line:52, name:cntNext, parameters:x, y int, return_type:cnt int
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 3: line:62, name:getDis, parameters:x, y int, return_type:int
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 4: line:66, name:backtrack, parameters:x, y int, step int, return_type:
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 5: line:97, name:main, parameters:, return_type:
-2024-03-08 15:56:17,519-func_golang-46-INFO - Get function 6: line:122, name:abs, parameters:x int, return_type:int
+2024-03-08 16:47:24,470-func_golang-46-INFO - Get function 0: line:39, name:pringG, parameters:, return_type:
+2024-03-08 16:47:24,471-func_golang-46-INFO - Get function 1: line:48, name:ok, parameters:x, y int, return_type:bool
+2024-03-08 16:47:24,471-func_golang-46-INFO - Get function 2: line:52, name:cntNext, parameters:x, y int, return_type:cnt int
+2024-03-08 16:47:24,471-func_golang-46-INFO - Get function 3: line:62, name:getDis, parameters:x, y int, return_type:int
+2024-03-08 16:47:24,471-func_golang-46-INFO - Get function 4: line:66, name:backtrack, parameters:x, y int, step int, return_type:
+2024-03-08 16:47:24,471-func_golang-46-INFO - Get function 5: line:97, name:main, parameters:, return_type:
+2024-03-08 16:47:24,471-func_golang-46-INFO - Get function 6: line:122, name:abs, parameters:x int, return_type:int
