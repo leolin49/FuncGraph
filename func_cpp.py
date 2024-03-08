@@ -65,7 +65,7 @@ class FuncCpp:
         fl = self.func_list
         g.add_nodes_from(obj.name for obj in self.func_list)
         [g.add_edge(fl[i].name, fl[j].name) for i in range(n) for j in self.edges[i]]
-        util.show_graph(g)
+        util.show_graph(g, "red")
 
     def start(self) -> None:
         self.__get_all_func()

@@ -21,7 +21,7 @@ def get_logger(log_file_path: str, name="Unknown log name"):
     return logger
 
 
-def show_graph(dig: nx.DiGraph):
+def show_graph(dig: nx.DiGraph, node_color: str):
     pos = nx.spring_layout(dig, k=1)
     # pos = nx.arf_layout(dig)
     nx.draw(dig, pos, with_labels=True)
@@ -32,6 +32,7 @@ def show_graph(dig: nx.DiGraph):
         pos,
         nodelist=nodes,
         node_size=2000,
+        node_color=node_color,
     )
     # draw edges
     edges = [(u, v) for (u, v) in dig.edges]

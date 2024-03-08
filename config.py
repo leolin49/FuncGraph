@@ -4,7 +4,7 @@
 #   1. cannot begin with digit
 #   2. cannot use the key word in language
 #   3. only include "0-9" "_" "A-Z" "a-z"
-
+""""""
 
 """
 Cpp Config
@@ -111,3 +111,4 @@ Python function code style:     def function_name(param: param_type) -> return_t
 FUNC_PATTERN_PYTHON = r"\s*def\s+([A-Za-z_]+\w*)\s*\((.*?)\)\s*[->]*\s*\(*(.*?)\)*\s*:"
 LOG_PATH_PYTHON = "log/python_log.log"
 LOG_NAME_PYTHON = "func_python"
+# KEYWORD_SET_PYTHON = keyword.kwlist

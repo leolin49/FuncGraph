@@ -37,7 +37,7 @@ def main():
         elif file_type == "py":
             f = FuncPython(file_path)
         else:
-            print("The type \"{}\" of source file is not supported".format(file_type))
+            print('The type "{}" of source file is not supported'.format(file_type))
             return
         f.start()
     elif cmd == "help":

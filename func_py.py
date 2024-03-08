@@ -1,4 +1,5 @@
 import re
+import keyword
 
 import util
 import config as cfg
@@ -38,10 +39,10 @@ class FuncPython:
             if len(funcs) == 0:
                 continue
             f_name, f_param, f_ret = funcs[0][0], funcs[0][1], funcs[0][2]
-            # if f_name in cfg.KEYWORD_SET_GOLANG or f_name in cfg.KEYWORD_SET_GOLANG:
-            #     # invalid function name
-            #     self.log.error("Invalid function name: {}".format(f_name))
-            #     continue
+            if keyword.iskeyword(f_name) or keyword.iskeyword(f_name):
+                # invalid function name
+                self.log.error("Invalid function name: {}".format(f_name))
+                continue
             f_lineno = lineno + 1
             self.log.info(
                 "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(
@@ -61,7 +62,7 @@ class FuncPython:
         for i in range(n):
             for j in self.edges[i]:
                 g.add_edge(fl[i].name, fl[j].name)
-        util.show_graph(g)
+        util.show_graph(g, "green")
 
     def start(self) -> None:
         self.__get_all_func()
