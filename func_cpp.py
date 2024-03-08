@@ -37,17 +37,20 @@ class FuncCpp:
             if len(s) >= 2 and (s[:2] == "//" or s[:2] == "/*"):
                 # commentary line
                 continue
-            funcs = re.findall(cfg.FUNC_PATTERN_CPP, s)
+            funcs = re.findall(r"\s*([A-Za-z_]+\w*)\s+(\w+[()]*)\s*\((.*?)\)\s*{*", s)
             if len(funcs) == 0:
                 # not match
                 continue
             f_ret, f_name, f_param = funcs[0][0], funcs[0][1], funcs[0][2]
-            if f_ret == "return":
+            if f_ret == "return" or f_name == "operator()":
+                # some special cases
                 continue
-            if f_name in cfg.KEYWORD_SET_CPP or f_name in cfg.KEYWORD_SET_CPP:
-                # invalid function name
-                self.log.error("Invalid function name: {}".format(f_name))
-                continue
+            if f_name in cfg.KEYWORD_SET_CPP or f_name in cfg.KEYWORD_SET_CPP or f_name[0].isdigit():
+                # invalid function name (keyword or begin with digit)
+                error_info = "invalid function name: {} in line {}".format(f_name, lineno + 1)
+                self.log.error(error_info)
+                print(error_info)
+                exit(1)
             f_lineno = lineno + 1
             self.log.info(
                 "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(

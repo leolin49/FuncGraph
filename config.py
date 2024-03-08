@@ -11,7 +11,7 @@ Cpp Config
 Function code style:    return_type function_name(parameter list)
     Example 1:          vector<string> split(char seq, int max_split) {
 """
-FUNC_PATTERN_CPP = r"\s*([A-Za-z_]+\w*)\s+([A-Za-z_]+\w+)\s*\((.*?)\)\s*{*"
+FUNC_PATTERN_CPP = r"\s*([A-Za-z_]+\w*)\s+([A-Za-z_]+\w+[()]*)\s*\((.*?)\)\s*{*"
 LOG_PATH_CPP = "log/cpp_log.log"
 LOG_NAME_CPP = "func_cpp"
 KEYWORD_SET_CPP = {
