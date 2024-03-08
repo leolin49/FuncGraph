@@ -44,6 +44,11 @@ void 2print2()
     cout << "test" << endl;
 }
 
+//void function_test_1()
+//{
+//    cout << "test" << endl;
+//}
+
 // 计算每个位置的下一步的位置数量
 int cntNext(vector<vector<int>>& g, int x, int y) {
     int cnt = 0;

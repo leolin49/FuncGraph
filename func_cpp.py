@@ -34,8 +34,12 @@ class FuncCpp:
         example: vector<string> split(char seq, int max_split) {
         """
         for lineno, s in enumerate(self.file_lines):
+            if len(s) >= 2 and (s[:2] == "//" or s[:2] == "/*"):
+                # commentary line
+                continue
             funcs = re.findall(cfg.FUNC_PATTERN_CPP, s)
             if len(funcs) == 0:
+                # not match
                 continue
             f_ret, f_name, f_param = funcs[0][0], funcs[0][1], funcs[0][2]
             if f_ret == "return":
@@ -60,9 +64,7 @@ class FuncCpp:
         n = self.func_id
         fl = self.func_list
         g.add_nodes_from(obj.name for obj in self.func_list)
-        for i in range(n):
-            for j in self.edges[i]:
-                g.add_edge(fl[i].name, fl[j].name)
+        [g.add_edge(fl[i].name, fl[j].name) for i in range(n) for j in self.edges[i]]
         util.show_graph(g)
 
     def start(self) -> None:
@@ -73,5 +75,6 @@ class FuncCpp:
                 cur_id = self.line_func[lineno + 1]
                 continue
             for obj in self.func_list:
-                if obj.name in s:
+                if re.search('.*?'+obj.name+'\s*\(', s) is not None:
                     self.edges[cur_id].append(obj.id)
+        self.draw()
