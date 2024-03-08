@@ -63,7 +63,7 @@ class FuncCpp:
             self.func_id += 1
         self.edges = [[] for _ in range(self.func_id)]
 
-    def draw(self) -> None:
+    def __draw(self) -> None:
         g = self.graph
         n = self.func_id
         fl = self.func_list
@@ -81,4 +81,4 @@ class FuncCpp:
             for obj in self.func_list:
                 if re.search(".*?" + obj.name + "\s*\(", s) is not None:
                     self.edges[cur_id].append(obj.id)
-        self.draw()
+        self.__draw()

@@ -57,7 +57,7 @@ class FuncGolang:
             self.func_id += 1
         self.edges = [[] for _ in range(self.func_id)]
 
-    def draw(self) -> None:
+    def __draw(self) -> None:
         g = self.graph
         n = self.func_id
         fl = self.func_list
@@ -77,3 +77,4 @@ class FuncGolang:
             for obj in self.func_list:
                 if obj.name in s:
                     self.edges[cur_id].append(obj.id)
+        self.__draw()

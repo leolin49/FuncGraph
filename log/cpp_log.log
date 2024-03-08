@@ -1,8 +1,7 @@
-2024-03-08 11:30:44,096-func_cpp-49-ERROR - Invalid function name: operator
-2024-03-08 11:30:44,097-func_cpp-52-INFO - Get function 0: line:29, name:ok, parameters:int x, int y, return_type:bool
-2024-03-08 11:30:44,097-func_cpp-52-INFO - Get function 1: line:33, name:print, parameters:vector<vector<int>>& g, return_type:void
-2024-03-08 11:30:44,097-func_cpp-49-ERROR - Invalid function name: 2print2
-2024-03-08 11:30:44,097-func_cpp-52-INFO - Get function 2: line:53, name:cntNext, parameters:vector<vector<int>>& g, int x, int y, return_type:int
-2024-03-08 11:30:44,097-func_cpp-52-INFO - Get function 3: line:66, name:getDis, parameters:int x, int y, return_type:int
-2024-03-08 11:30:44,097-func_cpp-52-INFO - Get function 4: line:71, name:backtrack, parameters:vector<vector<int>>& g, int x, int y, int step, return_type:void
-2024-03-08 11:30:44,097-func_cpp-52-INFO - Get function 5: line:101, name:main, parameters:, return_type:int
+2024-03-08 15:35:48,637-func_cpp-53-ERROR - Invalid function name: operator
+2024-03-08 15:35:48,637-func_cpp-56-INFO - Get function 0: line:29, name:ok, parameters:int x, int y, return_type:bool
+2024-03-08 15:35:48,637-func_cpp-56-INFO - Get function 1: line:33, name:print, parameters:vector<vector<int>>& g, return_type:void
+2024-03-08 15:35:48,637-func_cpp-56-INFO - Get function 2: line:53, name:cntNext, parameters:vector<vector<int>>& g, int x, int y, return_type:int
+2024-03-08 15:35:48,637-func_cpp-56-INFO - Get function 3: line:66, name:getDis, parameters:int x, int y, return_type:int
+2024-03-08 15:35:48,637-func_cpp-56-INFO - Get function 4: line:71, name:backtrack, parameters:vector<vector<int>>& g, int x, int y, int step, return_type:void
+2024-03-08 15:35:48,637-func_cpp-56-INFO - Get function 5: line:101, name:main, parameters:, return_type:int

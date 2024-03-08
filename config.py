@@ -1,16 +1,17 @@
 # Config file
+#
+# Function invalid name:
+#   1. cannot begin with digit
+#   2. cannot use the key word in language
+#   3. only include "0-9" "_" "A-Z" "a-z"
 
 
 """
 Cpp Config
 Function code style:    return_type function_name(parameter list)
     Example 1:          vector<string> split(char seq, int max_split) {
-
-Function name:
-    1. cannot be a C++ keyword
-    2. Cannot start with a number
 """
-FUNC_PATTERN_CPP = r"\s*(\w+)\s+(\w+)\s*\((.*?)\)\s*{*"
+FUNC_PATTERN_CPP = r"\s*([A-Za-z_]+\w+)\s+([A-Za-z_]+\w+)\s*\((.*?)\)\s*{*"
 LOG_PATH_CPP = "log/cpp_log.log"
 LOG_NAME_CPP = "func_cpp"
 KEYWORD_SET_CPP = {
@@ -70,9 +71,9 @@ Golang function code style:     func function_name(parameter list) (return list)
     Example 1:                  func split(seq rune, max_split uint32) []string {
     Example 2:                  func split(seq rune) (int, []string) {
 """
-FUNC_PATTERN_GOLANG = r"\s*func\s+(\w+)\s*\((.*?)\)\s*\(*(.*?)\)*\s*{"
+FUNC_PATTERN_GOLANG = r"\s*func\s+([A-Za-z_]+\w+)\s*\((.*?)\)\s*\(*(.*?)\)*\s*{"
 LOG_PATH_GOLANG = "log/golang_log.log"
-LOG_NAME_GOLANG = "func_golang" ""
+LOG_NAME_GOLANG = "func_golang"
 KEYWORD_SET_GOLANG = {
     "import",
     "package",
@@ -100,3 +101,13 @@ KEYWORD_SET_GOLANG = {
     "select",
     "switch",
 }
+
+"""
+Python Config
+Python function code style:     def function_name(param: param_type) -> return_type:
+    Example 1:                  def search(self: List[str], string: str, pos: int) -> List[str]:
+    Example 2:                  def dfs():
+"""
+FUNC_PATTERN_PYTHON = r"\s*def\s+([A-Za-z_]+\w+)\s*\((.*?)\)\s*[->]*\s*\(*(.*?)\)*\s*:"
+LOG_PATH_PYTHON = "log/python_log.log"
+LOG_NAME_PYTHON = "func_python"
