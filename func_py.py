@@ -6,7 +6,7 @@ from func import Func
 from networkx import DiGraph
 
 
-class FuncGolang:
+class FuncPython:
     def __init__(self, file_path: str):
         """
         func_id:    Unique ID of the function (begin with index 0)
@@ -23,7 +23,7 @@ class FuncGolang:
         self.func_list = []
         self.line_func = dict()
         self.edges = []
-        self.log = util.get_logger(cfg.LOG_PATH_GOLANG, cfg.LOG_NAME_GOLANG)
+        self.log = util.get_logger(cfg.LOG_PATH_PYTHON, cfg.LOG_NAME_PYTHON)
         with open(file_path, "r", encoding="utf-8") as f:
             for line in f.readlines():
                 self.file_lines.append(line)
@@ -34,18 +34,14 @@ class FuncGolang:
         example: def search(self: List[str], string: str, pos: int) -> List[str]:
         """
         for lineno, s in enumerate(self.file_lines):
-            funcs = re.findall(cfg.FUNC_PATTERN_GOLANG, s)
+            funcs = re.findall(cfg.FUNC_PATTERN_PYTHON, s)
             if len(funcs) == 0:
                 continue
             f_name, f_param, f_ret = funcs[0][0], funcs[0][1], funcs[0][2]
-            if (
-                f_name in cfg.KEYWORD_SET_GOLANG
-                or f_name in cfg.KEYWORD_SET_GOLANG
-                or f_name[0].isdigit()
-            ):
-                # invalid function name
-                self.log.error("Invalid function name: {}".format(f_name))
-                continue
+            # if f_name in cfg.KEYWORD_SET_GOLANG or f_name in cfg.KEYWORD_SET_GOLANG:
+            #     # invalid function name
+            #     self.log.error("Invalid function name: {}".format(f_name))
+            #     continue
             f_lineno = lineno + 1
             self.log.info(
                 "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(
@@ -57,7 +53,7 @@ class FuncGolang:
             self.func_id += 1
         self.edges = [[] for _ in range(self.func_id)]
 
-    def draw(self) -> None:
+    def __draw(self) -> None:
         g = self.graph
         n = self.func_id
         fl = self.func_list
@@ -75,5 +71,6 @@ class FuncGolang:
                 cur_id = self.line_func[lineno + 1]
                 continue
             for obj in self.func_list:
-                if obj.name in s:
+                if re.search(".*?" + obj.name + "\s*\(", s) is not None:
                     self.edges[cur_id].append(obj.id)
+        self.__draw()

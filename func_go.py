@@ -38,11 +38,7 @@ class FuncGolang:
             if len(funcs) == 0:
                 continue
             f_name, f_param, f_ret = funcs[0][0], funcs[0][1], funcs[0][2]
-            if (
-                f_name in cfg.KEYWORD_SET_GOLANG
-                or f_name in cfg.KEYWORD_SET_GOLANG
-                or f_name[0].isdigit()
-            ):
+            if f_name in cfg.KEYWORD_SET_GOLANG or f_name in cfg.KEYWORD_SET_GOLANG:
                 # invalid function name
                 self.log.error("Invalid function name: {}".format(f_name))
                 continue
@@ -75,6 +71,6 @@ class FuncGolang:
                 cur_id = self.line_func[lineno + 1]
                 continue
             for obj in self.func_list:
-                if obj.name in s:
+                if re.search(".*?" + obj.name + "\s*\(", s) is not None:
                     self.edges[cur_id].append(obj.id)
         self.__draw()

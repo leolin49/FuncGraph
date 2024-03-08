@@ -1,8 +1,10 @@
+import os.path
 import sys
 
 import util
 from func_cpp import FuncCpp
 from func_go import FuncGolang
+from func_py import FuncPython
 
 
 def print_help():
@@ -23,12 +25,20 @@ def main():
     cmd = sys.argv[1].lower()
     if cmd == "gen":
         file_path = sys.argv[2]
+        if not os.path.exists(file_path):
+            print("Source file not found: {}".format(file_path))
+            return
         file_type = util.get_file_type(file_path)
         f = None
         if file_type == "cpp":
             f = FuncCpp(file_path)
         elif file_type == "go":
             f = FuncGolang(file_path)
+        elif file_type == "py":
+            f = FuncPython(file_path)
+        else:
+            print("The type \"{}\" of source file is not supported".format(file_type))
+            return
         f.start()
     elif cmd == "help":
         print_help()
