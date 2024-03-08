@@ -1,0 +1,9 @@
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 0: line:39, name:pringG, parameters:, return_type:func
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 1: line:48, name:ok, parameters:x, y int, return_type:func
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 2: line:52, name:cntNext, parameters:x, y int, return_type:func
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 3: line:55, name:ok, parameters:nextX, nextY, return_type:if
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 4: line:62, name:getDis, parameters:x, y int, return_type:func
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 5: line:66, name:backtrack, parameters:x, y int, step int, return_type:func
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 6: line:76, name:ok, parameters:nextX, nextY, return_type:if
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 7: line:97, name:main, parameters:, return_type:func
+2024-03-07 22:16:43,645-func_golang-44-INFO - Get function 8: line:122, name:abs, parameters:x int, return_type:func
