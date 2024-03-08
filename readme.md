@@ -6,4 +6,4 @@
 
 示例：
 
-![](D:\github\CodeFileFuncGraph\image\example1.png)
+![](./image/example1.png)
