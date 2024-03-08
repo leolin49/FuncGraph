@@ -3,8 +3,12 @@
 
 """
 Cpp Config
-Cpp function code style:    return_type function_name(parameter list)
-    Example 1:              vector<string> split(char seq, int max_split) {
+Function code style:    return_type function_name(parameter list)
+    Example 1:          vector<string> split(char seq, int max_split) {
+
+Function name:
+    1. cannot be a C++ keyword
+    2. Cannot start with a number
 """
 KEYWORD_SET_CPP = {
     "if",

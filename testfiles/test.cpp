@@ -39,7 +39,7 @@ void print(vector<vector<int>>& g) {
     }
 }
 
-void print2()
+void 2print2()
 {
     cout << "test" << endl;
 }
