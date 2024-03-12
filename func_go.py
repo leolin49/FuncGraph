@@ -34,14 +34,20 @@ class FuncGolang:
         example: func split(seq rune, max_split uint32) ([]string) {
         """
         for lineno, s in enumerate(self.file_lines):
-            funcs = re.findall(cfg.FUNC_PATTERN_GOLANG, s)
+            funcs = re.findall(
+                r"\s*func\s+([A-Za-z_]+\w*)\s*\((.*?)\)\s*\(*(.*?)\)*\s*{", s
+            )
             if len(funcs) == 0:
                 continue
             f_name, f_param, f_ret = funcs[0][0], funcs[0][1], funcs[0][2]
-            if f_name in cfg.KEYWORD_SET_GOLANG or f_name in cfg.KEYWORD_SET_GOLANG:
-                # invalid function name
-                self.log.error("Invalid function name: {}".format(f_name))
-                continue
+            if f_name in cfg.KEYWORD_SET_GOLANG or f_name[0].isdigit():
+                # invalid function name (keyword or begin with digit)
+                error_info = "invalid function name: {} in line {}".format(
+                    f_name, lineno + 1
+                )
+                self.log.error(error_info)
+                print(error_info)
+                exit(1)
             f_lineno = lineno + 1
             self.log.info(
                 "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(
@@ -71,6 +77,11 @@ class FuncGolang:
                 cur_id = self.line_func[lineno + 1]
                 continue
             for obj in self.func_list:
-                if re.search(".*?" + obj.name + "\s*\(", s) is not None:
+                if re.search(".*?{}\s*\(".format(obj.name), s) is not None:
+                    self.log.info(
+                        "Find a function call: line: {}, relation: {} -> {}".format(
+                            lineno + 1, self.func_list[cur_id].name, obj.name
+                        )
+                    )
                     self.edges[cur_id].append(obj.id)
         self.__draw()

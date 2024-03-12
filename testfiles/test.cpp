@@ -39,11 +39,6 @@ void print(vector<vector<int>>& g) {
     }
 }
 
-void 2print2()
-{
-    cout << "test" << endl;
-}
-
 //void function_test_1()
 //{
 //    cout << "test" << endl;

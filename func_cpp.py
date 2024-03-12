@@ -34,7 +34,7 @@ class FuncCpp:
         example: vector<string> split(char seq, int max_split) {
         """
         for lineno, s in enumerate(self.file_lines):
-            if len(s) >= 2 and (s[:2] == "//" or s[:2] == "/*"):
+            if re.search(r"\s*/[/*].*?", s) is not None:
                 # commentary line
                 continue
             funcs = re.findall(r"\s*([A-Za-z_]+\w*)\s+(\w+[()]*)\s*\((.*?)\)\s*{*", s)
@@ -45,9 +45,11 @@ class FuncCpp:
             if f_ret == "return" or f_name == "operator()":
                 # some special cases
                 continue
-            if f_name in cfg.KEYWORD_SET_CPP or f_name in cfg.KEYWORD_SET_CPP or f_name[0].isdigit():
+            if f_name in cfg.KEYWORD_SET_CPP or f_name[0].isdigit():
                 # invalid function name (keyword or begin with digit)
-                error_info = "invalid function name: {} in line {}".format(f_name, lineno + 1)
+                error_info = "invalid function name: {} in line {}".format(
+                    f_name, lineno + 1
+                )
                 self.log.error(error_info)
                 print(error_info)
                 exit(1)
@@ -78,6 +80,11 @@ class FuncCpp:
                 cur_id = self.line_func[lineno + 1]
                 continue
             for obj in self.func_list:
-                if re.search(".*?" + obj.name + "\s*\(", s) is not None:
+                if re.search(r".*?{}\s*\(".format(obj.name), s) is not None:
+                    self.log.info(
+                        "Find a function call: line: {}, relation: {} -> {}".format(
+                            lineno + 1, self.func_list[cur_id].name, obj.name
+                        )
+                    )
                     self.edges[cur_id].append(obj.id)
         self.__draw()

@@ -1,3 +1,9 @@
 2024-03-08 15:56:11,506-func_python-47-INFO - Get function 0: line:4, name:b, parameters:n: int, return_type:
 2024-03-08 15:56:11,506-func_python-47-INFO - Get function 1: line:10, name:c, parameters:nums: List[int], return_type:int
 2024-03-08 15:56:11,506-func_python-47-INFO - Get function 2: line:14, name:a, parameters:param1: int, param2: List[int], return_type:bool
+2024-03-12 10:50:20,141-func_python-47-INFO - Get function 0: line:4, name:b, parameters:n: int, return_type:
+2024-03-12 10:50:20,141-func_python-47-INFO - Get function 1: line:10, name:c, parameters:nums: List[int], return_type:int
+2024-03-12 10:50:20,153-func_python-47-INFO - Get function 2: line:14, name:a, parameters:param1: int, param2: List[int], return_type:bool
+2024-03-12 10:50:20,153-func_python-76-INFO - Find a function call: line: 7, relation: b -> b
+2024-03-12 10:50:20,153-func_python-76-INFO - Find a function call: line: 15, relation: a -> b
+2024-03-12 10:50:20,153-func_python-76-INFO - Find a function call: line: 16, relation: a -> c

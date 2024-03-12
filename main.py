@@ -9,7 +9,9 @@ from func_py import FuncPython
 
 def print_help():
     print("Source file function call relation visualize.")
-    print('Currently supported source file types: C++->".cpp", Golang->".go", Python->".py"\n')
+    print(
+        'Currently supported source file types: C++->".cpp", Golang->".go", Python->".py"\n'
+    )
     print("Usage:\n")
     print("\tpython {} [command] [arguments]\n".format(sys.argv[0]))
     print("The Commands are:\n")
