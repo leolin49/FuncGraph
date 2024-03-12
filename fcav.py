@@ -10,6 +10,7 @@ import os.path
 import sys
 
 import util
+import config as cfg
 from func_cpp import FuncCpp
 from func_go import FuncGolang
 from func_py import FuncPython
@@ -17,9 +18,7 @@ from func_py import FuncPython
 
 def print_help():
     print("Hello, the FCAV is a tool of source code function call relation analyze and visualize.")
-    print(
-        'Currently supported source file types:\tC++: ".cpp", Golang: ".go", Python: ".py"\n'
-    )
+    print('Currently supported source file types:\tC++: ".cpp", Golang: ".go", Python: ".py"\n')
     print("Usage:\n")
     print("\tpython {} [command] [arguments]\n".format(sys.argv[0]))
     print("The Commands are:\n")
@@ -59,26 +58,22 @@ def main():
         input_type = sys.argv[2]
         inputs = []
         mode = 2
-        for line in sys.stdin:
-            inputs.append(line)
-        if len(inputs) == 0:
-            print('error: nothing input')
-            return
-        if input_type == "cpp":
-            f = FuncCpp(mode, inputs)
-        elif input_type == "go":
-            f = FuncGolang(mode, inputs)
-        elif input_type == "py":
-            f = FuncPython(mode, inputs)
-        else:
+        if input_type not in cfg.SUPPORT_LANG:
             print('The type "{}" of source code is not supported'.format(input_type))
             return
+        else:
+            print("input your code and enter Ctrl+Z for ending\n")
+            for line in sys.stdin:
+                inputs.append(line)
+            if input_type == "cpp":
+                f = FuncCpp(mode, inputs)
+            elif input_type == "go":
+                f = FuncGolang(mode, inputs)
+            elif input_type == "py":
+                f = FuncPython(mode, inputs)
         f.start()
     elif cmd == "help":
-        if len(sys.argv) < 3:
-            print_help()
-        else:
-            c = sys.argv[2]
+        print_help()
     else:
         print("{}: unknown command".format(sys.argv[1]))
         print("Run 'python fcav.py help' for usage.")
