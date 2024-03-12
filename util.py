@@ -51,7 +51,7 @@ def show_graph(dig: nx.DiGraph, node_color: str, edge_color="black"):
         arrows=True,
         arrowsize=40,
         arrowstyle="-|>",
-        edge_color=edge_color
+        edge_color=edge_color,
     )
     plt.show()
 

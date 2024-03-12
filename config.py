@@ -12,7 +12,7 @@
 #   1. cannot begin with digit
 #   2. cannot use the key word in language
 #   3. only include "0-9" "_" "A-Z" "a-z"
-""""""
+SUPPORT_LANG = {"cpp", "go", "py"}
 
 """
 Cpp Config
