@@ -67,7 +67,7 @@ class FuncGolang:
         for i in range(n):
             for j in self.edges[i]:
                 g.add_edge(fl[i].name, fl[j].name)
-        util.show_graph(g, "blue")
+        util.show_graph(g, cfg.NODE_COLOR_GOLANG, cfg.EDGE_COLOR_GOLANG)
 
     def start(self) -> None:
         self.__get_all_func()

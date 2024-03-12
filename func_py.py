@@ -68,7 +68,7 @@ class FuncPython:
         for i in range(n):
             for j in self.edges[i]:
                 g.add_edge(fl[i].name, fl[j].name)
-        util.show_graph(g, "green")
+        util.show_graph(g, cfg.NODE_COLOR_PYTHON, cfg.EDGE_COLOR_PYTHON)
 
     def start(self) -> None:
         self.__get_all_func()
