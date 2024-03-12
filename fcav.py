@@ -56,6 +56,7 @@ def main():
         f.start()
     elif cmd == "input":
         input_type = sys.argv[2]
+        input_type = input_type.lower()
         inputs = []
         mode = 2
         if input_type not in cfg.SUPPORT_LANG:
@@ -67,9 +68,9 @@ def main():
                 inputs.append(line)
             if input_type == "cpp":
                 f = FuncCpp(mode, inputs)
-            elif input_type == "go":
+            elif input_type == "go" or input_type == "golang":
                 f = FuncGolang(mode, inputs)
-            elif input_type == "py":
+            elif input_type == "py" or input_type == "python":
                 f = FuncPython(mode, inputs)
         f.start()
     elif cmd == "help":
