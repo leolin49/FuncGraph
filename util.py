@@ -21,7 +21,7 @@ def get_logger(log_file_path: str, name="Unknown log name"):
     return logger
 
 
-def show_graph(dig: nx.DiGraph, node_color: str):
+def show_graph(dig: nx.DiGraph, node_color: str, edge_color="black"):
     pos = nx.spring_layout(dig, k=1)
     # pos = nx.arf_layout(dig)
     nx.draw(dig, pos, with_labels=True)
@@ -43,6 +43,7 @@ def show_graph(dig: nx.DiGraph, node_color: str):
         arrows=True,
         arrowsize=40,
         arrowstyle="-|>",
+        edge_color=edge_color
     )
     plt.show()
 

@@ -7,26 +7,35 @@ import config as cfg
 
 
 class FuncCpp:
-    def __init__(self, file_path: str):
+    def __init__(self, mode: int, input_info=None):
         """
         func_id:    Unique ID of the function (begin with index 0)
-        file_path:  Source code "cpp" file path to be analyzed
         file_lines: The content of the source file is stored by line
         func_list:  Func object list
         line_func:  A dict, key = func_line, val = func_id
         edges:      A directed graph storing function call relationships
+        :param mode: Work mode, mode=1(from file) mode=2(from console)
+        :param input_info: Source code "cpp" file path to be analyzed
         """
         self.graph = DiGraph()
         self.func_id = 0
-        self.file_path = file_path
-        self.file_lines = []
         self.func_list = []
         self.line_func = dict()
         self.edges = []
         self.log = util.get_logger(cfg.LOG_PATH_CPP, cfg.LOG_NAME_CPP)
-        with open(file_path, "r", encoding="utf-8") as f:
-            for line in f.readlines():
-                self.file_lines.append(line)
+        self.file_lines = []
+        if input_info is None:
+            self.log.error("no input from mode {}".format(mode))
+            exit(1)
+        if mode == 1:
+            with open(input_info, "r", encoding="utf-8") as f:
+                for line in f.readlines():
+                    self.file_lines.append(line)
+        elif mode == 2:
+            self.file_lines = input_info
+        else:
+            self.log.error("unknown work mode {}".format(mode))
+            exit(1)
 
     def __get_all_func(self) -> None:
         """
@@ -70,7 +79,7 @@ class FuncCpp:
         fl = self.func_list
         g.add_nodes_from(obj.name for obj in self.func_list)
         [g.add_edge(fl[i].name, fl[j].name) for i in range(n) for j in self.edges[i]]
-        util.show_graph(g, "red")
+        util.show_graph(g, cfg.NODE_COLOR_CPP, cfg.EDGE_COLOR_CPP)
 
     def start(self) -> None:
         self.__get_all_func()

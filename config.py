@@ -14,6 +14,8 @@ Function code style:    return_type function_name(parameter list)
 FUNC_PATTERN_CPP = r"\s*([A-Za-z_]+\w*)\s+([A-Za-z_]+\w+[()]*)\s*\((.*?)\)\s*{*"
 LOG_PATH_CPP = "log/cpp_log.log"
 LOG_NAME_CPP = "func_cpp"
+NODE_COLOR_CPP = "red"
+EDGE_COLOR_CPP = "blue"
 KEYWORD_SET_CPP = {
     "if",
     "int",
@@ -74,6 +76,8 @@ Golang function code style:     func function_name(parameter list) (return list)
 FUNC_PATTERN_GOLANG = r"\s*func\s+([A-Za-z_]+\w*)\s*\((.*?)\)\s*\(*(.*?)\)*\s*{"
 LOG_PATH_GOLANG = "log/golang_log.log"
 LOG_NAME_GOLANG = "func_golang"
+NODE_COLOR_GOLANG = "yellow"
+EDGE_COLOR_GOLANG = "black"
 KEYWORD_SET_GOLANG = {
     "import",
     "package",
@@ -112,3 +116,5 @@ FUNC_PATTERN_PYTHON = r"\s*def\s+([A-Za-z_]+\w*)\s*\((.*?)\)\s*[->]*\s*\(*(.*?)\
 LOG_PATH_PYTHON = "log/python_log.log"
 LOG_NAME_PYTHON = "func_python"
 # KEYWORD_SET_PYTHON = keyword.kwlist
+NODE_COLOR_PYTHON = "green"
+EDGE_COLOR_PYTHON = "pink"
