@@ -6,17 +6,24 @@
 # Author  : linyf49@qq.com
 # File    : editor.py
 import tkinter as tk
+import threading
 from tkinter import filedialog, messagebox, font
+
+import config as cfg
+from func_cpp import FuncCpp
+from func_go import FuncGolang
+from func_py import FuncPython
 
 
 class Editor:
-    def __init__(self):
+    def __init__(self, run_type: str):
         self.root = tk.Tk()
-        self.root.title("Code Editor")
+        self.root.title("FCAV Code Editor")
         # create text box
         self.text_box = tk.Text(self.root, wrap=tk.WORD)
         self.text_box.pack(expand=True, fill=tk.BOTH)
         self.build_menu()
+        self.run_type = run_type
         self.context = ""
 
     def build_menu(self):
@@ -35,7 +42,7 @@ class Editor:
         about_menu.add_command(label="Version", command=self.show_version)
         menu_bar.add_cascade(label="Help", menu=about_menu)
         # Run
-        menu_bar.add_cascade(label="Run", command=self.quit_file)
+        menu_bar.add_cascade(label="Run", command=self.begin)
         self.root.config(menu=menu_bar)
         # editor font config
         font_style = font.Font(family="consolas", size=14)
@@ -56,9 +63,22 @@ class Editor:
             with open(file_path, "w") as file:
                 file.write(content)
 
-    def quit_file(self):
+    def begin(self):
         self.context = self.text_box.get("1.0", tk.END)
+        lines = self.context.split("\n")
+        f = None
+        if self.run_type == "cpp" or self.run_type == "c++":
+            f = FuncCpp(cfg.SUPPORT_MODE_EDIT, lines)
+        elif self.run_type == "go" or self.run_type == "golang":
+            f = FuncGolang(cfg.SUPPORT_MODE_EDIT, lines)
+        elif self.run_type == "py" or self.run_type == "python":
+            f = FuncPython(cfg.SUPPORT_MODE_EDIT, lines)
+        t1 = threading.Thread(f.start())
+        t1.start()
+
+    def quit_file(self):
         self.root.destroy()
+        exit(0)
 
     @staticmethod
     def show_about():

@@ -91,16 +91,8 @@ def main():
         if input_type not in cfg.SUPPORT_LANG:
             print('The type "{}" of source code is not supported'.format(input_type))
             return
-        ed = edt.Editor()
+        ed = edt.Editor(input_type)
         ed.run()
-        lines = ed.context.split("\n")
-        if input_type == "cpp" or input_type == "c++":
-            f = FuncCpp(mode, lines)
-        elif input_type == "go" or input_type == "golang":
-            f = FuncGolang(mode, lines)
-        elif input_type == "py" or input_type == "python":
-            f = FuncPython(mode, lines)
-        f.start()
     elif cmd == "help":
         print_help()
     else:
