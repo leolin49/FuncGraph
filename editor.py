@@ -6,7 +6,7 @@
 # Author  : linyf49@qq.com
 # File    : editor.py
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, font
 
 
 class Editor:
@@ -26,13 +26,15 @@ class Editor:
         file_menu.add_command(label="Open", command=self.open_file)
         file_menu.add_command(label="Save", command=self.save_file)
         file_menu.add_separator()
-        # file_menu.add_command(label="Exit", command=self.quit_file)
+        file_menu.add_command(label="Exit", command=self.quit_file)
         self.root.protocol("WM_DELETE_WINDOW", self.quit_file)
         menu_bar.add_cascade(label="File", menu=file_menu)
         about_menu = tk.Menu(menu_bar, tearoff=0)
         about_menu.add_command(label="About", command=self.show_about)
         menu_bar.add_cascade(label="About", menu=about_menu)
         self.root.config(menu=menu_bar)
+        font_style = font.Font(family="consolas", size=14)
+        self.text_box.configure(font=font_style)
 
     def open_file(self):
         file_path = filedialog.askopenfilename()
