@@ -35,11 +35,11 @@ class FuncGolang:
         if input_info is None:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
-        if mode == 1:
+        if mode == cfg.SUPPORT_MODE_FILE:
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
-        elif mode == 2:
+        elif mode == cfg.SUPPORT_MODE_TERM or mode == cfg.SUPPORT_MODE_EDIT:
             self.file_lines = input_info
         else:
             self.log.error("unknown work mode {}".format(mode))

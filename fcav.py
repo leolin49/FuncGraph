@@ -38,9 +38,9 @@ def main():
         return
 
     cmd = sys.argv[1].lower()
-    mode = 1
     f = None
     if cmd == "gen":
+        mode = cfg.SUPPORT_MODE_FILE
         if len(sys.argv) < 3:
             print_help()
             return
@@ -48,7 +48,6 @@ def main():
         if not os.path.exists(file_path):
             print("Source file not found: {}".format(file_path))
             return
-        mode = 1
         file_type = util.get_file_type(file_path)
         if file_type == "cpp":
             f = FuncCpp(mode, file_path)
@@ -61,6 +60,7 @@ def main():
             return
         f.start()
     elif cmd == "input":
+        mode = cfg.SUPPORT_MODE_TERM
         if len(sys.argv) < 3:
             print_help()
             return
@@ -74,7 +74,7 @@ def main():
         print("input your code and enter Ctrl+Z for ending\n")
         for line in sys.stdin:
             inputs.append(line)
-        if input_type == "cpp":
+        if input_type == "cpp" or input_type == "c++":
             f = FuncCpp(mode, inputs)
         elif input_type == "go" or input_type == "golang":
             f = FuncGolang(mode, inputs)
@@ -82,6 +82,7 @@ def main():
             f = FuncPython(mode, inputs)
         f.start()
     elif cmd == "editor":
+        mode = cfg.SUPPORT_MODE_EDIT
         if len(sys.argv) < 3:
             print_help()
             return
@@ -93,8 +94,7 @@ def main():
         ed = edt.Editor()
         ed.run()
         lines = ed.context.split("\n")
-        mode = 2
-        if input_type == "cpp":
+        if input_type == "cpp" or input_type == "c++":
             f = FuncCpp(mode, lines)
         elif input_type == "go" or input_type == "golang":
             f = FuncGolang(mode, lines)

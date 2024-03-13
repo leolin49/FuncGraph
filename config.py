@@ -12,6 +12,9 @@
 #   1. cannot begin with digit
 #   2. cannot use the key word in language
 #   3. only include "0-9" "_" "A-Z" "a-z"
+SUPPORT_MODE_FILE = 1
+SUPPORT_MODE_TERM = 2
+SUPPORT_MODE_EDIT = 3
 SUPPORT_LANG = {"cpp", "c++", "go", "golang", "py", "python"}
 
 """
