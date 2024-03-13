@@ -37,6 +37,7 @@ def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
     :param edge_color: Color string or rgb code for edge
     :return:
     """
+    plt.close()
     # the directed graph layout format
     pos = nx.spring_layout(dig, k=1)
     # pos = nx.arf_layout(dig)
