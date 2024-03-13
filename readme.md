@@ -13,6 +13,15 @@ python fcav.py gen testfiles/test.cpp
 示例
 
 ![](./image/example3.png)
+
+### 从文本框输入
+需要指定输入的代码类型，输入完成后关闭窗口即可执行
+```
+python fcav.py editor golang
+```
+![](./image/example5.png)
+
+
 ### 从控制台输入
 需要指定输入的代码类型，输入完成后 ***Ctrl+Z*** 结束输入
 ```

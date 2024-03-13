@@ -11,6 +11,7 @@ import sys
 
 import util
 import config as cfg
+import editor as edt
 from func_cpp import FuncCpp
 from func_go import FuncGolang
 from func_py import FuncPython
@@ -27,6 +28,8 @@ def print_help():
     print("\t\te.g. python fcav.py gen testfiles/test.go")
     print("\tinput\tInput the code snippet of the specified type from console")
     print("\t\te.g. python fcav.py input cpp\t(Then input your cpp code and enter the Ctrl+Z to end)")
+    print("\teditor\tInput the code snippet on a new editor")
+    print("\t\te.g. python fcav.py editor cpp\t(Then input your golang code and close the window to run FCAV)")
 
 
 def main():
@@ -38,6 +41,9 @@ def main():
     mode = 1
     f = None
     if cmd == "gen":
+        if len(sys.argv) < 3:
+            print_help()
+            return
         file_path = sys.argv[2]
         if not os.path.exists(file_path):
             print("Source file not found: {}".format(file_path))
@@ -55,6 +61,9 @@ def main():
             return
         f.start()
     elif cmd == "input":
+        if len(sys.argv) < 3:
+            print_help()
+            return
         input_type = sys.argv[2]
         input_type = input_type.lower()
         inputs = []
@@ -62,16 +71,35 @@ def main():
         if input_type not in cfg.SUPPORT_LANG:
             print('The type "{}" of source code is not supported'.format(input_type))
             return
-        else:
-            print("input your code and enter Ctrl+Z for ending\n")
-            for line in sys.stdin:
-                inputs.append(line)
-            if input_type == "cpp":
-                f = FuncCpp(mode, inputs)
-            elif input_type == "go" or input_type == "golang":
-                f = FuncGolang(mode, inputs)
-            elif input_type == "py" or input_type == "python":
-                f = FuncPython(mode, inputs)
+        print("input your code and enter Ctrl+Z for ending\n")
+        for line in sys.stdin:
+            inputs.append(line)
+        if input_type == "cpp":
+            f = FuncCpp(mode, inputs)
+        elif input_type == "go" or input_type == "golang":
+            f = FuncGolang(mode, inputs)
+        elif input_type == "py" or input_type == "python":
+            f = FuncPython(mode, inputs)
+        f.start()
+    elif cmd == "editor":
+        if len(sys.argv) < 3:
+            print_help()
+            return
+        input_type = sys.argv[2]
+        input_type = input_type.lower()
+        if input_type not in cfg.SUPPORT_LANG:
+            print('The type "{}" of source code is not supported'.format(input_type))
+            return
+        ed = edt.Editor()
+        ed.run()
+        lines = ed.context.split("\n")
+        mode = 2
+        if input_type == "cpp":
+            f = FuncCpp(mode, lines)
+        elif input_type == "go" or input_type == "golang":
+            f = FuncGolang(mode, lines)
+        elif input_type == "py" or input_type == "python":
+            f = FuncPython(mode, lines)
         f.start()
     elif cmd == "help":
         print_help()
