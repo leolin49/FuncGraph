@@ -22,17 +22,22 @@ class Editor:
     def build_menu(self):
         # build menu
         menu_bar = tk.Menu(self.root)
+        self.root.protocol("WM_DELETE_WINDOW", self.quit_file)
         file_menu = tk.Menu(menu_bar, tearoff=0)
+        # File
         file_menu.add_command(label="Open", command=self.open_file)
         file_menu.add_command(label="Save", command=self.save_file)
-        file_menu.add_separator()
-        file_menu.add_command(label="Exit", command=self.quit_file)
-        self.root.protocol("WM_DELETE_WINDOW", self.quit_file)
+        # file_menu.add_separator()
         menu_bar.add_cascade(label="File", menu=file_menu)
+        # About
         about_menu = tk.Menu(menu_bar, tearoff=0)
         about_menu.add_command(label="About", command=self.show_about)
-        menu_bar.add_cascade(label="About", menu=about_menu)
+        about_menu.add_command(label="Version", command=self.show_version)
+        menu_bar.add_cascade(label="Help", menu=about_menu)
+        # Run
+        menu_bar.add_cascade(label="Run", command=self.quit_file)
         self.root.config(menu=menu_bar)
+        # editor font config
         font_style = font.Font(family="consolas", size=14)
         self.text_box.configure(font=font_style)
 
@@ -57,7 +62,11 @@ class Editor:
 
     @staticmethod
     def show_about():
-        messagebox.showinfo("About", "Contact: linyf@qq.com")
+        messagebox.showinfo("About", "Contact: linyf@qq.com\nGithub: https://github.com/leolin49/FuncGraph")
+
+    @staticmethod
+    def show_version():
+        messagebox.showinfo("Version about FCAV", "1.0")
 
     def run(self):
         self.root.mainloop()

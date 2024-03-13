@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 def get_logger(log_file_path: str, name="Unknown log name"):
     """
-    get logger
+    Get logger
     :param log_file_path: log file path
     :param name: log name
     :return: logging object by default config
@@ -29,7 +29,15 @@ def get_logger(log_file_path: str, name="Unknown log name"):
     return logger
 
 
-def show_graph(dig: nx.DiGraph, node_color: str, edge_color="black"):
+def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
+    """
+    Visualize the function call relationship by a directed graph
+    :param dig: DiGraph Object of lib networkx
+    :param node_color: Color string or rgb code for node
+    :param edge_color: Color string or rgb code for edge
+    :return:
+    """
+    # the directed graph layout format
     pos = nx.spring_layout(dig, k=1)
     # pos = nx.arf_layout(dig)
     nx.draw(dig, pos, with_labels=True)
