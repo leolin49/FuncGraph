@@ -19,17 +19,21 @@ from func_py import FuncPython
 
 def print_help():
     print("Hello, the FCAV is a tool of source code function call relation analyze and visualize.")
-    print('Currently supported source file types:\tC++: ".cpp", Golang: ".go", Python: ".py"\n')
+    print('Current supported languages:\tC++: ".cpp", Golang: ".go", Python: ".py"\n')
     print("Usage:\n")
     print("\tpython {} [command] [arguments]\n".format(sys.argv[0]))
     print("The Commands are:\n")
+    # help
     print("\thelp\tPrint the instructions and usage")
+    # gen
     print("\tgen\tGenerate function call relationships for a given source file")
     print("\t\te.g. python fcav.py gen testfiles/test.go")
+    # input
     print("\tinput\tInput the code snippet of the specified type from console")
     print("\t\te.g. python fcav.py input cpp\t(Then input your cpp code and enter the Ctrl+Z to end)")
+    # editor
     print("\teditor\tInput the code snippet on a new editor")
-    print("\t\te.g. python fcav.py editor cpp\t(Then input your golang code and close the window to run FCAV)")
+    print("\t\te.g. python fcav.py editor cpp\t(Then input your cpp code and click the 'Run' button to run FCAV)")
 
 
 def main():
@@ -67,7 +71,6 @@ def main():
         input_type = sys.argv[2]
         input_type = input_type.lower()
         inputs = []
-        mode = 2
         if input_type not in cfg.SUPPORT_LANG:
             print('The type "{}" of source code is not supported'.format(input_type))
             return
@@ -82,7 +85,7 @@ def main():
             f = FuncPython(mode, inputs)
         f.start()
     elif cmd == "editor":
-        mode = cfg.SUPPORT_MODE_EDIT
+        # mode = cfg.SUPPORT_MODE_EDIT
         if len(sys.argv) < 3:
             print_help()
             return

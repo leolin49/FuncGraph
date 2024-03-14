@@ -82,7 +82,10 @@ class Editor:
 
     @staticmethod
     def show_about():
-        messagebox.showinfo("About", "Contact: linyf@qq.com\nGithub: https://github.com/leolin49/FuncGraph")
+        messagebox.showinfo(
+            "About",
+            "Contact: linyf@qq.com\nGithub: https://github.com/leolin49/FuncGraph",
+        )
 
     @staticmethod
     def show_version():

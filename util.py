@@ -38,9 +38,12 @@ def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
     :return:
     """
     plt.close()
+
     # the directed graph layout format
-    pos = nx.spring_layout(dig, k=1)
+    # pos = nx.spring_layout(dig, k=1)
     # pos = nx.arf_layout(dig)
+    pos = nx.drawing.nx_pydot.graphviz_layout(dig, prog="dot")
+
     nx.draw(dig, pos, with_labels=True)
     # draw nodes
     nodes = [node for node in dig.nodes]
