@@ -12,6 +12,10 @@
 #   1. cannot begin with digit
 #   2. cannot use the key word in language
 #   3. only include "0-9" "_" "A-Z" "a-z"
+
+# Enable the compiler detect
+COMPILER_DETECT = False
+
 SUPPORT_MODE_FILE = 1
 SUPPORT_MODE_TERM = 2   # To be discarded
 SUPPORT_MODE_EDIT = 3

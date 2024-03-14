@@ -38,16 +38,17 @@ class FuncCpp:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
         if mode == cfg.SUPPORT_MODE_FILE or mode == cfg.SUPPORT_MODE_EDIT:
-            result = subprocess.run(
-                ["g++", "-c", input_info, "-o", "./tmp/{}.o".format(int(time.time()))],
-                capture_output=True,
-            )
-            if result.returncode == 0:
-                print("g++ compile successfully!\n")
-            else:
-                print("g++ compile failed!\n")
-                print(result.stderr.decode())
-                exit(0)
+            if cfg.COMPILER_DETECT:
+                result = subprocess.run(
+                    ["g++", "-c", input_info, "-o", "./tmp/{}.o".format(int(time.time()))],
+                    capture_output=True,
+                )
+                if result.returncode == 0:
+                    print("g++ compile successfully!\n")
+                else:
+                    print("g++ compile failed!\n")
+                    print(result.stderr.decode())
+                    exit(0)
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)

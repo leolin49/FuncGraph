@@ -74,14 +74,13 @@ def get_file_type(filename: str) -> str:
 
 
 def run_type2file_type(run_type: str) -> str:
-    file_type = "txt"
     if run_type == "c++":
-        file_type = "cpp"
+        return "cpp"
     elif run_type == "golang":
-        file_type = "go"
+        return "go"
     elif run_type == "python":
-        file_type = "py"
-    return file_type
+        return "py"
+    return run_type
 
 
 def check_file_syntax(file_path) -> (bool, str):

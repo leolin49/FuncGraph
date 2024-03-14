@@ -37,11 +37,12 @@ class FuncPython:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
         if mode == cfg.SUPPORT_MODE_FILE or mode == cfg.SUPPORT_MODE_EDIT:
-            ok, err = util.check_file_syntax(input_info)
-            if not ok:
-                print("python syntax check failed:" + err)
-                exit(0)
-            print("python syntax check success")
+            if cfg.COMPILER_DETECT:
+                ok, err = util.check_file_syntax(input_info)
+                if not ok:
+                    print("python syntax check failed:" + err)
+                    exit(0)
+                print("python syntax check success")
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)

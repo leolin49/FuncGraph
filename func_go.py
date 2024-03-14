@@ -38,16 +38,17 @@ class FuncGolang:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
         if mode == cfg.SUPPORT_MODE_FILE or mode == cfg.SUPPORT_MODE_EDIT:
-            result = subprocess.run(
-                ["go", "build", "-o", "./tmp/" + str(int(time.time())), input_info],
-                capture_output=True,
-            )
-            if result.returncode == 0:
-                print("go build successfully!\n")
-            else:
-                print("go build failed!\n")
-                print(result.stderr.decode())
-                exit(0)
+            if cfg.COMPILER_DETECT:
+                result = subprocess.run(
+                    ["go", "build", "-o", "./tmp/" + str(int(time.time())), input_info],
+                    capture_output=True,
+                )
+                if result.returncode == 0:
+                    print("go build successfully!\n")
+                else:
+                    print("go build failed!\n")
+                    print(result.stderr.decode())
+                    exit(0)
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
