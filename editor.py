@@ -5,6 +5,7 @@
 # Time    : 2024/3/13 15:25
 # Author  : linyf49@qq.com
 # File    : editor.py
+import time
 import tkinter as tk
 import threading
 from tkinter import filedialog, messagebox, font
@@ -42,11 +43,16 @@ class Editor:
         about_menu.add_command(label="Version", command=self.show_version)
         menu_bar.add_cascade(label="Help", menu=about_menu)
         # Run
-        menu_bar.add_cascade(label="Run", command=self.begin)
+        menu_bar.add_cascade(label="Run", command=self.begin_with_file)
         self.root.config(menu=menu_bar)
-        # editor font config
-        font_style = font.Font(family="consolas", size=14)
-        self.text_box.configure(font=font_style)
+        self.text_box.configure(
+            font=("consolas", 14, "bold"),
+            tabs=" " * 4,
+            bg="white",
+            fg="black",
+            insertbackground="black",
+            insertwidth=2,
+        )
 
     def open_file(self):
         file_path = filedialog.askopenfilename()
@@ -60,7 +66,7 @@ class Editor:
         file_path = filedialog.asksaveasfilename(defaultextension=".txt")
         if file_path:
             content = self.text_box.get("1.0", tk.END)
-            with open(file_path, "w") as file:
+            with open(file_path, "w", encoding="utf-8") as file:
                 file.write(content)
 
     def begin(self):
@@ -76,6 +82,21 @@ class Editor:
         t1 = threading.Thread(f.start())
         t1.start()
 
+    def begin_with_file(self):
+        file_path = "./tmp/{}.{}".format(int(time.time()), self.run_type)
+        content = self.text_box.get("1.0", tk.END)
+        with open(file_path, "w", encoding="utf-8") as file:
+            file.write(content)
+        f = None
+        if self.run_type == "cpp" or self.run_type == "c++":
+            f = FuncCpp(cfg.SUPPORT_MODE_EDIT, file_path)
+        elif self.run_type == "go" or self.run_type == "golang":
+            f = FuncGolang(cfg.SUPPORT_MODE_EDIT, file_path)
+        elif self.run_type == "py" or self.run_type == "python":
+            f = FuncPython(cfg.SUPPORT_MODE_EDIT, file_path)
+        t1 = threading.Thread(f.start())
+        t1.start()
+
     def quit_file(self):
         self.root.destroy()
         exit(0)
@@ -84,7 +105,8 @@ class Editor:
     def show_about():
         messagebox.showinfo(
             "About",
-            "Contact: linyf@qq.com\nGithub: https://github.com/leolin49/FuncGraph",
+            "Contact: linyf49@qq.com\n"
+            "Github: https://github.com/leolin49/FuncGraph",
         )
 
     @staticmethod

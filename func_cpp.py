@@ -7,6 +7,8 @@
 # File    : func_cpp.py
 
 import re
+import subprocess
+import time
 
 import util
 from func import Func
@@ -35,11 +37,20 @@ class FuncCpp:
         if input_info is None:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
-        if mode == cfg.SUPPORT_MODE_FILE:
+        if mode == cfg.SUPPORT_MODE_FILE or mode == cfg.SUPPORT_MODE_EDIT:
+            result = subprocess.run(
+                ["g++", "-c", input_info, "-o", "./tmp/{}.o".format(int(time.time()))],
+                capture_output=True,
+            )
+            if result.returncode == 0:
+                print("g++ compile successfully!\n")
+            else:
+                print(result.stderr.decode())
+                exit(1)
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
-        elif mode == cfg.SUPPORT_MODE_TERM or mode == cfg.SUPPORT_MODE_EDIT:
+        elif mode == cfg.SUPPORT_MODE_TERM:
             self.file_lines = input_info
         else:
             self.log.error("unknown work mode {}".format(mode))
