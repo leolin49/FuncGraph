@@ -36,15 +36,20 @@ class FuncPython:
         if input_info is None:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
-        if mode == cfg.SUPPORT_MODE_FILE:
+        if mode == cfg.SUPPORT_MODE_FILE or mode == cfg.SUPPORT_MODE_EDIT:
+            ok, err = util.check_file_syntax(input_info)
+            if not ok:
+                print("python syntax check failed:" + err)
+                exit(0)
+            print("python syntax check success")
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
-        elif mode == cfg.SUPPORT_MODE_TERM or mode == cfg.SUPPORT_MODE_EDIT:
+        elif mode == cfg.SUPPORT_MODE_TERM:
             self.file_lines = input_info
         else:
             self.log.error("unknown work mode {}".format(mode))
-            exit(1)
+            exit(0)
 
     def __get_all_func(self) -> None:
         """

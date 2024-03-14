@@ -18,7 +18,9 @@ from func_py import FuncPython
 
 
 def print_help():
-    print("Hello, the FCAV is a tool of source code function call relation analyze and visualize.")
+    print(
+        "Hello, the FCAV is a tool of source code function call relation analyze and visualize."
+    )
     print('Current supported languages:\tC++: ".cpp", Golang: ".go", Python: ".py"\n')
     print("Usage:\n")
     print("\tpython {} [command] [arguments]\n".format(sys.argv[0]))

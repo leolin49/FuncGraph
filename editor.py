@@ -11,6 +11,7 @@ import threading
 from tkinter import filedialog, messagebox, font
 
 import config as cfg
+import util
 from func_cpp import FuncCpp
 from func_go import FuncGolang
 from func_py import FuncPython
@@ -83,7 +84,9 @@ class Editor:
         t1.start()
 
     def begin_with_file(self):
-        file_path = "./tmp/{}.{}".format(int(time.time()), self.run_type)
+        file_path = "./tmp/{}.{}".format(
+            int(time.time()), util.run_type2file_type(self.run_type)
+        )
         content = self.text_box.get("1.0", tk.END)
         with open(file_path, "w", encoding="utf-8") as file:
             file.write(content)
@@ -105,8 +108,7 @@ class Editor:
     def show_about():
         messagebox.showinfo(
             "About",
-            "Contact: linyf49@qq.com\n"
-            "Github: https://github.com/leolin49/FuncGraph",
+            "Contact: linyf49@qq.com\n" "Github: https://github.com/leolin49/FuncGraph",
         )
 
     @staticmethod

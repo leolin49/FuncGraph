@@ -45,8 +45,9 @@ class FuncCpp:
             if result.returncode == 0:
                 print("g++ compile successfully!\n")
             else:
+                print("g++ compile failed!\n")
                 print(result.stderr.decode())
-                exit(1)
+                exit(0)
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
@@ -54,7 +55,7 @@ class FuncCpp:
             self.file_lines = input_info
         else:
             self.log.error("unknown work mode {}".format(mode))
-            exit(1)
+            exit(0)
 
     def __get_all_func(self) -> None:
         """

@@ -7,6 +7,8 @@
 # File    : func_go.py
 
 import re
+import subprocess
+import time
 
 import util
 import config as cfg
@@ -35,15 +37,25 @@ class FuncGolang:
         if input_info is None:
             self.log.error("no input from mode {}".format(mode))
             exit(1)
-        if mode == cfg.SUPPORT_MODE_FILE:
+        if mode == cfg.SUPPORT_MODE_FILE or mode == cfg.SUPPORT_MODE_EDIT:
+            result = subprocess.run(
+                ["go", "build", "-o", "./tmp/" + str(int(time.time())), input_info],
+                capture_output=True,
+            )
+            if result.returncode == 0:
+                print("go build successfully!\n")
+            else:
+                print("go build failed!\n")
+                print(result.stderr.decode())
+                exit(0)
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
-        elif mode == cfg.SUPPORT_MODE_TERM or mode == cfg.SUPPORT_MODE_EDIT:
+        elif mode == cfg.SUPPORT_MODE_TERM:
             self.file_lines = input_info
         else:
             self.log.error("unknown work mode {}".format(mode))
-            exit(1)
+            exit(0)
 
     def __get_all_func(self) -> None:
         """

@@ -66,7 +66,29 @@ def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
         edge_color=edge_color,
     )
     plt.show()
+    print("Function call relationship graph draw finish.")
 
 
 def get_file_type(filename: str) -> str:
     return filename.split(".")[-1]
+
+
+def run_type2file_type(run_type: str) -> str:
+    file_type = "txt"
+    if run_type == "c++":
+        file_type = "cpp"
+    elif run_type == "golang":
+        file_type = "go"
+    elif run_type == "python":
+        file_type = "py"
+    return file_type
+
+
+def check_file_syntax(file_path) -> (bool, str):
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            source_code = file.read()
+        compile(source_code, file_path, "exec")
+        return True, ""
+    except SyntaxError as e:
+        return False, e.__str__()
