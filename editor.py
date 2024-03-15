@@ -43,14 +43,14 @@ class Editor:
         self.root.protocol("WM_DELETE_WINDOW", self.__quit_file)
         file_menu = tk.Menu(menu_bar, tearoff=0)
         # File
-        file_menu.add_command(label="Open", command=self.__open_file)
-        file_menu.add_command(label="Save", command=self.__save_file)
+        file_menu.add_command(label="Open(O)", command=self.__open_file)
+        file_menu.add_command(label="Save(S)", command=self.__save_file)
         # file_menu.add_separator()
         menu_bar.add_cascade(label="File(F)", menu=file_menu)
         # About
         about_menu = tk.Menu(menu_bar, tearoff=0)
-        about_menu.add_command(label="About", command=self.__show_about)
-        about_menu.add_command(label="Version", command=self.__show_version)
+        about_menu.add_command(label="About(A)", command=self.__show_about)
+        about_menu.add_command(label="Version(V)", command=self.__show_version)
         menu_bar.add_cascade(label="Help(H)", menu=about_menu)
         # Run
         menu_bar.add_cascade(label="Run(R)", command=self.__begin_with_file)
@@ -65,7 +65,8 @@ class Editor:
         self.text_box.bind("<Control-Key-o>", lambda event: self.__open_file())
         self.text_box.bind("<Control-Key-s>", lambda event: self.__save_file())
         self.text_box.bind("<Control-Key-q>", lambda event: self.__quit_file())
-        self.text_box.bind("<Control-Key-a>", lambda event: Editor.__show_about())
+        # self.text_box.bind("<Control-Key-a>", lambda event: Editor.__show_about())
+        # self.text_box.bind("<Control-Key-v>", lambda event: Editor.__show_version())
 
     def __open_file(self):
         file_path = filedialog.askopenfilename()
