@@ -41,7 +41,7 @@ def print_help():
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print_help()
         return
 
@@ -56,9 +56,6 @@ def main():
     f = None
     if cmd == "gen":
         mode = cfg.SUPPORT_MODE_FILE
-        if len(sys.argv) < 3:
-            print_help()
-            return
         file_path = sys.argv[2]
         if not os.path.exists(file_path):
             print("Source file not found: {}".format(file_path))
@@ -76,9 +73,6 @@ def main():
         f.start()
     elif cmd == "input":
         mode = cfg.SUPPORT_MODE_TERM
-        if len(sys.argv) < 3:
-            print_help()
-            return
         input_type = sys.argv[2]
         input_type = input_type.lower()
         inputs = []
@@ -97,9 +91,6 @@ def main():
         f.start()
     elif cmd == "editor":
         # mode = cfg.SUPPORT_MODE_EDIT
-        if len(sys.argv) < 3:
-            print_help()
-            return
         input_type = sys.argv[2]
         input_type = input_type.lower()
         if input_type not in cfg.SUPPORT_LANG:

@@ -13,7 +13,7 @@ class Func:
         self.ret = ret
         self.line_num = lineno
 
-    def to_str(self):
+    def __str__(self):
         return (
             "Get function {}: line:{}, name:{}, parameters:{}, return_type:{}".format(
                 self.id, self.line_num, self.name, self.param, self.ret
