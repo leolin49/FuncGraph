@@ -19,14 +19,23 @@ from func_py import FuncPython
 
 class Editor:
     def __init__(self, run_type: str):
+        self.run_type = run_type
+        self.context = ""
         self.root = tk.Tk()
         self.root.title("FCAV Code Editor")
         # create text box
         self.text_box = tk.Text(self.root, wrap=tk.WORD)
         self.text_box.pack(expand=True, fill=tk.BOTH)
+        self.text_box.configure(
+            font=("consolas", 14, "bold"),
+            # tabs=" " * 2,
+            bg="white",
+            fg="black",
+            insertbackground="black",
+            insertwidth=2,
+        )
         self.__build_menu()
-        self.run_type = run_type
-        self.context = ""
+        self.__bind_keyboard()
 
     def __build_menu(self):
         # build menu
@@ -37,23 +46,26 @@ class Editor:
         file_menu.add_command(label="Open", command=self.__open_file)
         file_menu.add_command(label="Save", command=self.__save_file)
         # file_menu.add_separator()
-        menu_bar.add_cascade(label="File", menu=file_menu)
+        menu_bar.add_cascade(label="File(F)", menu=file_menu)
         # About
         about_menu = tk.Menu(menu_bar, tearoff=0)
         about_menu.add_command(label="About", command=self.__show_about)
         about_menu.add_command(label="Version", command=self.__show_version)
-        menu_bar.add_cascade(label="Help", menu=about_menu)
+        menu_bar.add_cascade(label="Help(H)", menu=about_menu)
         # Run
-        menu_bar.add_cascade(label="Run", command=self.__begin_with_file)
+        menu_bar.add_cascade(label="Run(R)", command=self.__begin_with_file)
+        # Quit
+        menu_bar.add_cascade(label="Quit(Q)", command=self.__quit_file)
         self.root.config(menu=menu_bar)
-        self.text_box.configure(
-            font=("consolas", 14, "bold"),
-            tabs=" " * 4,
-            bg="white",
-            fg="black",
-            insertbackground="black",
-            insertwidth=2,
-        )
+
+    def __bind_keyboard(self):
+        self.text_box.bind("<Tab>", lambda event: self.__handle_tab())
+        self.text_box.bind("<F5>", lambda event: self.__begin_with_file())
+        self.text_box.bind("<Control-Key-r>", lambda event: self.__begin_with_file())
+        self.text_box.bind("<Control-Key-o>", lambda event: self.__open_file())
+        self.text_box.bind("<Control-Key-s>", lambda event: self.__save_file())
+        self.text_box.bind("<Control-Key-q>", lambda event: self.__quit_file())
+        self.text_box.bind("<Control-Key-a>", lambda event: Editor.__show_about())
 
     def __open_file(self):
         file_path = filedialog.askopenfilename()
@@ -91,6 +103,11 @@ class Editor:
     def __quit_file(self):
         self.root.destroy()
         exit(0)
+
+    def __handle_tab(self):
+        self.text_box.insert(tk.INSERT, " " * 4)
+        # blocking the default Tab key behavior
+        return 'break'
 
     @staticmethod
     def __show_about():
