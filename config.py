@@ -17,7 +17,7 @@
 COMPILER_DETECT = False
 
 SUPPORT_MODE_FILE = 1
-SUPPORT_MODE_TERM = 2   # To be discarded
+SUPPORT_MODE_TERM = 2  # To be discarded
 SUPPORT_MODE_EDIT = 3
 SUPPORT_LANG = {"cpp", "c++", "go", "golang", "py", "python"}
 

@@ -15,6 +15,7 @@ import util
 from func_cpp import FuncCpp
 from func_go import FuncGolang
 from func_py import FuncPython
+from func_base import FuncBase
 
 
 class Editor:
@@ -108,7 +109,7 @@ class Editor:
     def __handle_tab(self):
         self.text_box.insert(tk.INSERT, " " * 4)
         # blocking the default Tab key behavior
-        return 'break'
+        return "break"
 
     @staticmethod
     def __show_about():
