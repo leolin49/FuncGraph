@@ -10,6 +10,8 @@ import logging
 import networkx as nx
 import matplotlib.pyplot as plt
 
+from config_graph import GraphConfig
+
 
 def get_logger(log_file_path: str, name="Unknown log name"):
     """
@@ -29,12 +31,11 @@ def get_logger(log_file_path: str, name="Unknown log name"):
     return logger
 
 
-def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
+def show_graph(dig: nx.DiGraph, g_cfg: GraphConfig):
     """
     Visualize the function call relationship by a directed graph
     :param dig: DiGraph Object of lib networkx
-    :param node_color: Color string or rgb code for node
-    :param edge_color: Color string or rgb code for edge
+    :param g_cfg: DiGraph draw config
     :return:
     """
     plt.close()
@@ -51,8 +52,8 @@ def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
         dig,
         pos,
         nodelist=nodes,
-        node_size=2000,
-        node_color=node_color,
+        node_size=g_cfg.node_size,
+        node_color=g_cfg.node_color,
     )
     # draw edges
     edges = [(u, v) for (u, v) in dig.edges]
@@ -63,7 +64,7 @@ def show_graph(dig: nx.DiGraph, node_color="red", edge_color="black"):
         arrows=True,
         arrowsize=40,
         arrowstyle="-|>",
-        edge_color=edge_color,
+        edge_color=g_cfg.edge_color,
     )
     plt.show()
     print("Function call relationship graph draw finish.")

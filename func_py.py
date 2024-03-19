@@ -13,6 +13,7 @@ import util
 import config as cfg
 from func import Func
 from func_base import FuncBase
+from config_graph import GraphConfig
 
 
 class FuncPython(FuncBase):
@@ -77,7 +78,10 @@ class FuncPython(FuncBase):
 
     def __draw(self) -> None:
         super().draw()
-        util.show_graph(self.graph, cfg.NODE_COLOR_PYTHON, cfg.EDGE_COLOR_PYTHON)
+        util.show_graph(
+            self.graph,
+            GraphConfig(cfg.NODE_COLOR_PYTHON, cfg.EDGE_COLOR_PYTHON, 2000, 40, "-|>"),
+        )
 
     def start(self) -> None:
         self.__get_all_func()

@@ -18,9 +18,7 @@ from func_py import FuncPython
 
 
 def print_help():
-    print(
-        "Hello, the FCAV is a tool of source code function call relation analyze and visualize."
-    )
+    print("Hello, the FCAV is a tool of source code function call relation analyze and visualize.")
     print('Current supported languages:\tC++: ".cpp", Golang: ".go", Python: ".py"\n')
     print("Usage:")
     print("\tpython {} [command] [arguments] [options]\n".format(sys.argv[0]))
@@ -32,14 +30,10 @@ def print_help():
     print("\t\te.g. python fcav.py gen testfiles/test.go -c")
     # input
     print("\tinput\tInput the code snippet of the specified type from console")
-    print(
-        "\t\te.g. python fcav.py input cpp\t(Then input your cpp code and enter the Ctrl+Z to end)"
-    )
+    print("\t\te.g. python fcav.py input cpp\t(Then input your cpp code and enter the Ctrl+Z to end)")
     # editor
     print("\teditor\tInput the code snippet on a new editor")
-    print(
-        "\t\te.g. python fcav.py editor cpp\t(Then input your cpp code and click the 'Run' button to run FCAV)"
-    )
+    print("\t\te.g. python fcav.py editor cpp\t(Then input your cpp code and click the 'Run' button to run FCAV)")
     print("The Options are:")
     print("\t-c\tTurn on the relevant compiler for syntax checkout")
 
