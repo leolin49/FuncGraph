@@ -49,6 +49,7 @@ class FuncCpp(FuncBase):
                     self.compile_ok = False
                     print("g++ compile failed!\n")
                     print(result.stderr.decode())
+                    self.error_info = result.stderr.decode()
                     return
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():

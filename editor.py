@@ -8,7 +8,7 @@
 import time
 import tkinter as tk
 import threading
-from tkinter import filedialog, messagebox, font
+from tkinter import filedialog, messagebox
 
 import config as cfg
 import util
@@ -98,8 +98,8 @@ class Editor:
             f = FuncGolang(cfg.SUPPORT_MODE_EDIT, file_path)
         elif self.run_type == "py" or self.run_type == "python":
             f = FuncPython(cfg.SUPPORT_MODE_EDIT, file_path)
+
         if not f.compile_ok:
-            messagebox.showinfo("Error", "Compile Failed!")
             return
         t1 = threading.Thread(f.start())
         t1.start()

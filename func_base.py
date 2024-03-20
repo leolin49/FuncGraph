@@ -30,6 +30,7 @@ class FuncBase:
     edges: List[List[int]]
     log: None
     compile_ok: bool = True
+    error_info: str = ""
 
     def __init__(self):
         self.graph = DiGraph()
