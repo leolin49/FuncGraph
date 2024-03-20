@@ -43,11 +43,13 @@ class FuncCpp(FuncBase):
                     capture_output=True,
                 )
                 if result.returncode == 0:
+                    self.compile_ok = True
                     print("g++ compile successfully!\n")
                 else:
+                    self.compile_ok = False
                     print("g++ compile failed!\n")
                     print(result.stderr.decode())
-                    exit(0)
+                    return
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
                     self.file_lines.append(line)
@@ -66,7 +68,9 @@ class FuncCpp(FuncBase):
             if re.search(r"\s*/[/*].*?", s) is not None:
                 # commentary line
                 continue
-            funcs = re.findall(r"\s*([A-Za-z_]+\w*)\s+(\w+[()]*)\s*\((.*?)\)\s*{*", s)
+            funcs = re.findall(
+                r"\s*([A-Za-z_]+\w*)\s+([A-Za-z_]+\w*[()]*)\s*\((.*?)\)\s*{*", s
+            )
             if len(funcs) == 0:
                 # not match
                 continue
@@ -74,8 +78,8 @@ class FuncCpp(FuncBase):
             if f_ret == "return" or f_name == "operator()":
                 # some special cases
                 continue
-            if f_name in cfg.KEYWORD_SET_CPP or f_name[0].isdigit():
-                # invalid function name (keyword or begin with digit)
+            if f_name in cfg.KEYWORD_SET_CPP:
+                # invalid function name
                 error_info = "invalid function name: {} in line {}".format(
                     f_name, lineno + 1
                 )

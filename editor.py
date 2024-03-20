@@ -15,7 +15,6 @@ import util
 from func_cpp import FuncCpp
 from func_go import FuncGolang
 from func_py import FuncPython
-from func_base import FuncBase
 
 
 class Editor:
@@ -99,6 +98,9 @@ class Editor:
             f = FuncGolang(cfg.SUPPORT_MODE_EDIT, file_path)
         elif self.run_type == "py" or self.run_type == "python":
             f = FuncPython(cfg.SUPPORT_MODE_EDIT, file_path)
+        if not f.compile_ok:
+            messagebox.showinfo("Error", "Compile Failed!")
+            return
         t1 = threading.Thread(f.start())
         t1.start()
 

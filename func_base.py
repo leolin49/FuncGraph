@@ -29,6 +29,7 @@ class FuncBase:
     line_func: Dict[int, int]
     edges: List[List[int]]
     log: None
+    compile_ok: bool = True
 
     def __init__(self):
         self.graph = DiGraph()

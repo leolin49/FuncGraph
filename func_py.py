@@ -33,8 +33,10 @@ class FuncPython(FuncBase):
             if cfg.COMPILER_DETECT:
                 ok, err = util.check_file_syntax(input_info)
                 if not ok:
+                    self.compile_ok = False
                     print("python syntax check failed:" + err)
-                    exit(0)
+                    return
+                self.compile_ok = True
                 print("python syntax check success")
             with open(input_info, "r", encoding="utf-8") as f:
                 for line in f.readlines():
@@ -51,6 +53,9 @@ class FuncPython(FuncBase):
         example: def search(self: List[str], string: str, pos: int) -> List[str]:
         """
         for lineno, s in enumerate(self.file_lines):
+            if re.search(r"\s*#.*?", s) is not None:
+                # commentary line
+                continue
             funcs = re.findall(
                 r"\s*def\s+([A-Za-z_]+\w*)\s*\((.*?)\)\s*[->]*\s*\(*(.*?)\)*\s*:", s
             )
